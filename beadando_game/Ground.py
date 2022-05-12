@@ -21,10 +21,10 @@ class Ground:
         self.height = height
         self.cellsize = 20
         vertices = [
-            -width / 2 + x, y, -height / 2 + z,
-            width / 2 + x, y, -height / 2 + z,
-            width / 2 + x, y, height / 2 + z,
-            -width / 2 + x, y, height / 2 + z
+            -width / 2 + x, y, -height / 2 + z, 0, 0,
+            width / 2 + x, y, -height / 2 + z, 10, 0,
+            width / 2 + x, y, height / 2 + z, 10, 10,
+            -width / 2 + x, y, height / 2 + z, 0, 10
         ]
         vertices = numpy.array(vertices, dtype=numpy.float32)
         self.buffer = glGenBuffers(1)
@@ -46,8 +46,6 @@ class Ground:
                 fragment_shader, GL_FRAGMENT_SHADER)
         )
         self.groundTexture = Texture("sand2.png")
-        Texture.enableTexturing()
-        self.groundTexture.activate()
 
     def setLightPos(self, x, y, z):
         self.lightX = x
@@ -55,6 +53,9 @@ class Ground:
         self.lightZ = z
 
     def render(self, viewMatrix, projectionMatrix):
+        Texture.enableTexturing()
+        self.groundTexture.activate()
+
         glUseProgram(self.shader)
         proj_loc = glGetUniformLocation(self.shader, 'projection')
         view_loc = glGetUniformLocation(self.shader, 'view')
@@ -67,7 +68,14 @@ class Ground:
         glEnableVertexAttribArray(position_loc)
         #glVertexAttribPointer(position_loc, 3, GL_FLOAT, False, vertices.itemsize * 3, ctypes.c_void_p(0))
         glVertexAttribPointer(position_loc, 3, GL_FLOAT,
-                              False, 0, ctypes.c_void_p(0))
+                              False, 4 * 5, ctypes.c_void_p(0))
+
+        texture_loc = glGetAttribLocation(self.shader, 'in_texture')
+        glEnableVertexAttribArray(texture_loc)
+        #glVertexAttribPointer(position_loc, 3, GL_FLOAT, False, vertices.itemsize * 3, ctypes.c_void_p(0))
+        glVertexAttribPointer(texture_loc, 2, GL_FLOAT,
+                              False, 4 * 5, ctypes.c_void_p(3*4))
+
 
         glDrawArrays(GL_QUADS, 0, 4)
 

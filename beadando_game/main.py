@@ -130,7 +130,7 @@ glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 
 # load image
-image = Image.open("C:\\Users\\SIMONMARCI\\Desktop\\opnegl githubrepo\\Új mappa\\openglsopron\\12\\bomberman\\earth.jpg")
+image = Image.open("earth.jpg")
 #image = image.transpose(Image.FLIP_TOP_BOTTOM)
 img_data = image.convert("RGBA").tobytes()
 # img_data = np.array(image.getdata(), np.uint8) # second way of getting the raw image data
@@ -184,7 +184,7 @@ if selectObject == ObjectType.SPHERE:
 	zTranslate = -50
 
 if selectObject == ObjectType.CUSTOM_MODEL:
-	indices, vertices = ObjLoader.load_model("wrumwrumm.obj")
+	indices, vertices = ObjLoader.load_model("cactus2.obj")
 	vertCount = len(indices)
 	shapeType = GL_TRIANGLES
 	zTranslate = -50
@@ -234,7 +234,21 @@ def createModel(shader):
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.nbytes, indices, GL_STATIC_DRAW)
     
-	# Az OpenGL nem tudja, hogy a bufferben levo szamokat hogy kell ertelmezni
+	# Feltoltjuk a buffert a szamokkal.
+	glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
+    
+	# Ideiglenesen inaktivaljuk a buffert, hatha masik objektumot is akarunk csinalni.
+	glBindBuffer(GL_ARRAY_BUFFER, 0)
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
+
+	return vao, ebo
+
+def renderModel(vao, ebo, vertCount, shapeType):
+	# Mindig 1 GL_ARRAY_BUFFER lehet aktiv, most megmondjuk, hogy melyik legyen az
+	glBindBuffer(GL_ARRAY_BUFFER, vao)
+#	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
+	
+		# Az OpenGL nem tudja, hogy a bufferben levo szamokat hogy kell ertelmezni
 	# A kovetkezo 3 sor ezert megmondja, hogy majd 3-asaval kell kiszednia bufferbpl
 	# a szamokat, és azokat a vertex shaderben levo 'position' 3-as vektorba kell mindig 
 	# betolteni.
@@ -249,19 +263,8 @@ def createModel(shader):
 	texture_loc = glGetAttribLocation(shader, 'in_texture')
 	glEnableVertexAttribArray(texture_loc)
 	glVertexAttribPointer(texture_loc, 2, GL_FLOAT, False, vertices.itemsize * 8, ctypes.c_void_p(24))
-	# Feltoltjuk a buffert a szamokkal.
-	glBufferData(GL_ARRAY_BUFFER, vertices.nbytes, vertices, GL_STATIC_DRAW)
-    
-	# Ideiglenesen inaktivaljuk a buffert, hatha masik objektumot is akarunk csinalni.
-	glBindBuffer(GL_ARRAY_BUFFER, 0)
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0)
 
-	return vao, ebo
-
-def renderModel(vao, ebo, vertCount, shapeType):
-	# Mindig 1 GL_ARRAY_BUFFER lehet aktiv, most megmondjuk, hogy melyik legyen az
-	glBindBuffer(GL_ARRAY_BUFFER, vao)
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo)
+	
 	# Kirajzoljuk a buffert, a 0. vertextol kezdve, 24-et ( a kockanak 6 oldala van, minden oldalhoz 4 csucs).
 	glDrawArrays(shapeType, 0, vertCount)
 	#glDrawElements(GL_TRIANGLES, vertCount, GL_UNSIGNED_INT, None)
