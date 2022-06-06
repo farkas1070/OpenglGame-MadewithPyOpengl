@@ -263,10 +263,10 @@ glUniformMatrix4fv(perspectiveLocation, 1, GL_FALSE, perspMat)
 
 # objektgenerálási függvéyn, ami a rendelést, és mindent csinál paraméterezve
 
+modelV, modelI = createModel(shader)
+def generateobject(modelV,modelI, translatex, translatez, translatey, scalex, scalez, scaley):
 
-def generateobject(shader, translatex, translatez, translatey, scalex, scalez, scaley):
-
-    modelV, modelI = createModel(shader)
+    
     transMat = pyrr.matrix44.create_from_translation(
         pyrr.Vector3([translatex, translatez, translatey]))
     scaleMat = pyrr.matrix44.create_from_scale([scalex, scalez, scaley])
@@ -283,7 +283,7 @@ def placebackgroundmodels(zpositionforobject):
 
     for _ in range(12):
         generateobject(shader, leftxpositionforobject, -
-                       50, zpositionforobject, 30, 30, 30)
+                       50, zpositionforobject, 30, 30, 30)    
         generateobject(shader, rightxpositionforobject, -
                        50, zpositionforobject, 30, 30, 30)
         zpositionforobject -= 600
@@ -292,6 +292,8 @@ def placebackgroundmodels(zpositionforobject):
 world.setLightPos(lightX, lightY, lightZ)
 viewMat = pyrr.matrix44.create_look_at(
     [0.0, 0.0, 0.0], [0.0, 0.0, -1.0], [0.0, 1.0, 0.0])
+
+
 
 while not glfw.window_should_close(window) and not exitProgram and not failed:
     startTime = glfw.get_time()
@@ -338,7 +340,22 @@ while not glfw.window_should_close(window) and not exitProgram and not failed:
     glUseProgram(shader)
     glUniform3f(viewPos_loc, camera.x, camera.y, camera.z)
     # ezek a külső mapon vannak, csak a látvány miatt vannak bennt
-    placebackgroundmodels(zpositionforobject)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 5500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 6500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 4500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 3500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 2500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 1500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 2000, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 5500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 6500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 4500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 3500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 2500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 1500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 2000, 30, 30, 30)
     wintexture.activate()
 
     skybox_loc = glGetUniformLocation(shader, "skybox")
