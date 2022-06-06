@@ -279,14 +279,24 @@ def generateobject(modelV,modelI, translatex, translatez, translatey, scalex, sc
     renderModel(modelV, modelI, vertCount, shapeType)
 
 
-def placebackgroundmodels(zpositionforobject):
-
-    for _ in range(12):
-        generateobject(shader, leftxpositionforobject, -
-                       50, zpositionforobject, 30, 30, 30)    
-        generateobject(shader, rightxpositionforobject, -
-                       50, zpositionforobject, 30, 30, 30)
-        zpositionforobject -= 600
+def placebackgroundmodels():
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 5500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 6500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 4500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 3500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 2500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 1500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, 2000, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 5500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 6500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 4500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 3500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 2500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 1500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, 2000, 30, 30, 30)
+    
 
 
 world.setLightPos(lightX, lightY, lightZ)
@@ -340,22 +350,7 @@ while not glfw.window_should_close(window) and not exitProgram and not failed:
     glUseProgram(shader)
     glUniform3f(viewPos_loc, camera.x, camera.y, camera.z)
     # ezek a külső mapon vannak, csak a látvány miatt vannak bennt
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 5500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 6500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 4500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 3500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 2500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 1500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 500, 30, 30, 30)
-    generateobject(modelV,modelI,leftxpositionforobject, -50, 2000, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 5500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 6500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 4500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 3500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 2500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 1500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 500, 30, 30, 30)
-    generateobject(modelV,modelI,rightxpositionforobject, -50, 2000, 30, 30, 30)
+    placebackgroundmodels()
     wintexture.activate()
 
     skybox_loc = glGetUniformLocation(shader, "skybox")
