@@ -97,7 +97,7 @@ class ObjLoader:
             # use with glDrawElements
             ObjLoader.create_unsorted_vertex_buffer(all_indices, vert_coords, tex_coords, norm_coords)
 
-        # ObjLoader.show_buffer_data(ObjLoader.buffer)
+        
 
         buffer = ObjLoader.buffer.copy() # create a local copy of the buffer list, otherwise it will overwrite the static field buffer
         ObjLoader.buffer = [] # after copy, make sure to set it back to an empty list

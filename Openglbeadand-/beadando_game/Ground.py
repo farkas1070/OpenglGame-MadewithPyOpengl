@@ -66,13 +66,11 @@ class Ground:
 
         position_loc = glGetAttribLocation(self.shader, 'in_position')
         glEnableVertexAttribArray(position_loc)
-        #glVertexAttribPointer(position_loc, 3, GL_FLOAT, False, vertices.itemsize * 3, ctypes.c_void_p(0))
         glVertexAttribPointer(position_loc, 3, GL_FLOAT,
                               False, 4 * 5, ctypes.c_void_p(0))
 
         texture_loc = glGetAttribLocation(self.shader, 'in_texture')
         glEnableVertexAttribArray(texture_loc)
-        #glVertexAttribPointer(position_loc, 3, GL_FLOAT, False, vertices.itemsize * 3, ctypes.c_void_p(0))
         glVertexAttribPointer(texture_loc, 2, GL_FLOAT,
                               False, 4 * 5, ctypes.c_void_p(3*4))
 

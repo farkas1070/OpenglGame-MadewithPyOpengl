@@ -194,9 +194,9 @@ class Map:
         glVertexAttribPointer(texture_loc, 2, GL_FLOAT,
                               False, vertices.itemsize * 8, ctypes.c_void_p(24))
 
-        # Kirajzoljuk a buffert, a 0. vertextol kezdve, 24-et ( a kockanak 6 oldala van, minden oldalhoz 4 csucs).
+        
         glDrawArrays(shapeType, 0, vertCount)
-        #glDrawElements(GL_TRIANGLES, vertCount, GL_UNSIGNED_INT, None)
+        
 
     def render(self, camera, projectionMatrix):
 

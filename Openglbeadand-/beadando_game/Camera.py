@@ -19,8 +19,7 @@ class Camera:
 		self.dirX = 0
 		self.dirY = 0
 		self.dirZ = -1
-		self.angleVert = -90.0
-		self.angleHoriz = 0.0
+		
 	
 	def move(self, dist):
 		"""!

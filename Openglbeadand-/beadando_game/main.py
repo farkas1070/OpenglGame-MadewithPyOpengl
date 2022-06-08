@@ -296,7 +296,10 @@ def placebackgroundmodels():
     generateobject(modelV,modelI,rightxpositionforobject, -50, 1500, 30, 30, 30)
     generateobject(modelV,modelI,rightxpositionforobject, -50, 500, 30, 30, 30)
     generateobject(modelV,modelI,rightxpositionforobject, -50, 2000, 30, 30, 30)
-    
+    generateobject(modelV,modelI,rightxpositionforobject, -50, -500, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, -500, 30, 30, 30)
+    generateobject(modelV,modelI,rightxpositionforobject, -50, -1000, 30, 30, 30)
+    generateobject(modelV,modelI,leftxpositionforobject, -50, -1000, 30, 30, 30)
 
 
 world.setLightPos(lightX, lightY, lightZ)
