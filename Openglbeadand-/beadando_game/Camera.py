@@ -45,34 +45,10 @@ class Camera:
 	def getCellPosition(self, cellSize):
 		return int(self.x / cellSize), int(self.z / cellSize)
 
-	def __update(self):
-		self.dirX = math.cos(math.radians(self.angleVert))
-		self.dirZ = math.sin(math.radians(self.angleVert))
-		self.dirY = math.sin(math.radians(self.angleHoriz))
-		length = math.sqrt(self.dirX ** 2 + self.dirY ** 2 + self.dirZ ** 2)
-		self.dirX /= length
-		self.dirY /= length
-		self.dirZ /= length
 
-	def rotateUpDown(self, movement):
-		"""!
-			A kamerat forgatja el az yz sik menten, az x tengely korul. Ugyel arra, hogy -45 és 45
-			fok kozott maradjunk, ne tudjunk 'hatrabukfencet' csinalni.
-		"""
-		self.angleHoriz += movement
-		self.angleHoriz = min(45.0, max(-45.0, self.angleHoriz))
-		self.__update()
-		
+	
 	def moveonx(self,value):
 		self.x += value
-
-	def rotateRightLeft(self, movement):
-		"""!
-			A kamerat forgatja el az xz sik menten, az y tengely korul.
-		"""
-		self.angleVert += movement
-		self.__update()
-	
 
 	def getMatrixForCubemap(self):
 		return pyrr.matrix44.create_look_at([0.0, 0.0, 0.0], 

@@ -107,11 +107,11 @@ glBindBuffer(GL_ARRAY_BUFFER, rectangle)
 # shaderek beolvasása, elnevezése
 with open("screen_shader.vert") as f:
     vertex_shader = f.read()
-    print(vertex_shader)
+    
 
 with open("screen_shader.frag") as f:
     fragment_shader = f.read()
-    print(fragment_shader)
+    
 screen_shader = OpenGL.GL.shaders.compileProgram(
     OpenGL.GL.shaders.compileShader(vertex_shader, GL_VERTEX_SHADER),
     OpenGL.GL.shaders.compileShader(fragment_shader, GL_FRAGMENT_SHADER)
@@ -122,11 +122,11 @@ glUseProgram(0)
 
 with open("vertex_shader_texture.vert") as f:
     vertex_shader = f.read()
-    print(vertex_shader)
+    
 
 with open("fragment_shader_texture.frag") as f:
     fragment_shader = f.read()
-    print(fragment_shader)
+    
 
 position_loc = glGetAttribLocation(screen_shader, 'in_position')
 glEnableVertexAttribArray(position_loc)
@@ -336,7 +336,7 @@ while not glfw.window_should_close(window) and not exitProgram and not failed:
         collision = True
         failed = True
 
-    print(world.getCellType(cellZ, cellX))
+
 
     glClearDepth(1.0)
     glClearColor(0, 0.1, 0.1, 1)
